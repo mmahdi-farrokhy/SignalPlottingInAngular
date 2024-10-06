@@ -1,8 +1,24 @@
 mat-form-field {
     width: 200px;
     margin-top: 20px;
+    margin-left: 20px;
 }
 
 button {
     height: 56px;
+}
+
+.on-shod {
+    background-color: green;
+    color: #fff;
+}
+
+.off-shod {
+    background-color: red;
+    color: #fff;
+}
+
+div {
+    width: 100%;
+    height: 400px;
 }

@@ -8,5 +8,18 @@
     </mat-select>
   </mat-form-field>
 
-  <button mat-flat-button color="primary" (click)="startDrawing()">Start Drawing</button>
+  <button mat-flat-button [className]="className" [color]="buttonColor" (click)="startDrawing()">
+    {{ buttonText }}
+  </button>
+
+  <div>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+    <app-real-time-plot></app-real-time-plot>
+  </div>
 </div>
