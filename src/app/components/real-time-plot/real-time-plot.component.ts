@@ -17,10 +17,19 @@ export class RealTimePlotComponent {
 
   ngAfterViewInit() {
     const options: uPlot.Options = {
-      width: 800,
-      height: 400,
-      title: `Channel ${this.channelIndex}`,
+      width: 1000,
+      height: 200,
       scales: { x: { time: false }, y: { auto: true } },
+      axes: [
+        {
+          // Customize the x-axis to display seconds
+          label: "Seconds",
+          values: (u, vals) => vals.map(v => v.toFixed(2)) // formatting values to 2 decimal places
+        },
+        {
+          label: `Signal ${this.channelIndex}`
+        }
+      ],
       series: [
         { label: 'Time' },
         { label: `Signal ${this.channelIndex}`, stroke: 'blue', width: 1 },
@@ -36,6 +45,8 @@ export class RealTimePlotComponent {
 
   startRealTimeData() {
     let time = 0;
+    this.uplotInstance.setData([new Float64Array([]), new Float64Array([])]);
+    
     this.intervalId = setInterval(() => {
       if (!this.shouldRefresh) return;
 
@@ -45,14 +56,14 @@ export class RealTimePlotComponent {
       const currentXArray = Array.from(this.uplotInstance.data[0]).filter(x => x !== null && x !== undefined);
       const currentYArray = Array.from(this.uplotInstance.data[1]).filter(y => y !== null && y !== undefined);
 
-      currentXArray.push(newX);
+      currentXArray.push(newX/32);
       currentYArray.push(newY);
 
       const newXArray = new Float64Array(currentXArray);
       const newYArray = new Float64Array(currentYArray);
 
       this.uplotInstance.setData([newXArray, newYArray]);
-    }, 1000 / 128);
+    }, 1000 / 40);
   }
 
   stopRealTimeData() {

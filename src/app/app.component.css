@@ -9,16 +9,33 @@ button {
 }
 
 .started {
-    background-color: green;
+    background-color: red;
     color: #fff;
+    width: 500px;
+    margin-left: 20px;
 }
 
 .stopped {
-    background-color: red;
+    background-color: green;
     color: #fff;
+    width: 500px;
+    margin-left: 20px;
 }
 
 div {
     width: 100%;
-    height: 400px;
+    height: 100px;
+}
+
+.plot-container {
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+app-real-time-plot {
+    width: 100%;
+    display: block;
+    position: relative;
 }
