@@ -8,12 +8,12 @@ button {
     height: 56px;
 }
 
-.on-shod {
+.started {
     background-color: green;
     color: #fff;
 }
 
-.off-shod {
+.stopped {
     background-color: red;
     color: #fff;
 }
