@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import uPlot from 'uplot';
 
 @Component({
@@ -10,35 +10,37 @@ import uPlot from 'uplot';
 })
 export class RealTimePlotComponent {
   @ViewChild('plotContainer', { static: true }) plotContainer: ElementRef | undefined;
-
+  @Input() shouldRefresh: boolean = true;
+  @Input() channelIndex: number;
   uplotInstance!: uPlot;
-  data: any[] = [];
+  intervalId: any;
 
   ngAfterViewInit() {
-    // Initial configuration for uPlot
     const options: uPlot.Options = {
       width: 800,
       height: 400,
+      title: `Channel ${this.channelIndex}`,
       scales: { x: { time: false }, y: { auto: true } },
       series: [
-        { label: 'Time' }, // x-axis (time)
-        { label: 'Signal', stroke: 'blue', width: 1 }, // y-axis (signal)
+        { label: 'Time' },
+        { label: `Signal ${this.channelIndex}`, stroke: 'blue', width: 1 },
       ]
     };
 
-    // Initialize uPlot
     this.uplotInstance = new uPlot(options, [[], []], this.plotContainer?.nativeElement);
 
-    // Start streaming data for real-time plotting
-    this.startRealTimeData();
+    if (this.shouldRefresh) {
+      this.startRealTimeData();
+    }
   }
 
   startRealTimeData() {
     let time = 0;
+    this.intervalId = setInterval(() => {
+      if (!this.shouldRefresh) return;
 
-    setInterval(() => {
       const newX = time++;
-      const newY = Math.sin(newX / 10) * 100 + Math.random() * 20;
+      const newY = Math.sin(newX / 10) * 100;
 
       const currentXArray = Array.from(this.uplotInstance.data[0]).filter(x => x !== null && x !== undefined);
       const currentYArray = Array.from(this.uplotInstance.data[1]).filter(y => y !== null && y !== undefined);
@@ -53,4 +55,18 @@ export class RealTimePlotComponent {
     }, 1000 / 128);
   }
 
+  stopRealTimeData() {
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
+      this.intervalId = null;
+    }
+  }
+
+  ngOnChanges() {
+    if (this.shouldRefresh) {
+      this.startRealTimeData();
+    } else {
+      this.stopRealTimeData();
+    }
+  }
 }

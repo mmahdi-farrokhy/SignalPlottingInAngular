@@ -1,7 +1,7 @@
 <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 20px;">
   <mat-form-field appearance="outline">
     <mat-label>Number of channels</mat-label>
-    <mat-select [(ngModel)]="selectedChannels">
+    <mat-select [(ngModel)]="selectedChannels" (selectionChange)="onChannelsCountChange($event.value)">
       <mat-option *ngFor="let channel of channels" [value]="channel">
         {{ channel }}
       </mat-option>
@@ -12,14 +12,8 @@
     {{ buttonText }}
   </button>
 
-  <div>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
-    <app-real-time-plot></app-real-time-plot>
+  <div class="plot-container" *ngFor="let i of getCounterArray(); let index = index">
+    <app-real-time-plot [shouldRefresh]="shouldDraw" [channelIndex]="index + 1">
+    </app-real-time-plot>
   </div>
 </div>
