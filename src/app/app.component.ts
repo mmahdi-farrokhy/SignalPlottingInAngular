@@ -28,7 +28,7 @@ export class AppComponent {
 
   notDrawingText: string = 'Start Drawing';
   notDrawingColor: string = 'primary';
-  
+
   drawingText: string = 'Is Drawing...';
   drawingColor: string = 'accent';
 
@@ -42,13 +42,14 @@ export class AppComponent {
     console.log(`Selected number of channels: ${this.selectedChannels}`);
 
     switch (this.plotStatus) {
-      case PlotStatus.NotStarted: {
+      case PlotStatus.NotStarted:
+      case PlotStatus.Stopped: {
         this.buttonText = this.drawingText;
         this.buttonColor = this.drawingColor;
         this.className = "started";
         this.plotStatus = PlotStatus.Started;
         this.shouldDraw = true;
-        console.log(`not started --> started`);
+        console.log(`not started/stopped --> started`);
         break;
       }
 
@@ -60,17 +61,7 @@ export class AppComponent {
         this.shouldDraw = false;
         console.log(`started --> stopped`);
         break;
-      }
-
-      case PlotStatus.Stopped: {
-        this.buttonText = this.drawingText;
-        this.buttonColor = this.drawingColor;
-        this.className = "started";
-        this.plotStatus = PlotStatus.Started;
-        this.shouldDraw = true;
-        console.log(`stopped --> started`);
-        break;
-      }
+      }      
     }
   }
 
