@@ -1,16 +1,16 @@
 <div [ngSwitch]="plotType">
     <div *ngSwitchCase="0">
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
-        <app-uplot-template></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
+        <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
     </div>
     <div *ngSwitchCase="1">
-        <p>ECharts</p>
+        <app-echarts-template></app-echarts-template>
     </div>
     <div *ngSwitchCase="2">
         <p>Something Else</p>
