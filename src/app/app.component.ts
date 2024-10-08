@@ -61,7 +61,7 @@ export class AppComponent {
         this.shouldDraw = false;
         console.log(`started --> stopped`);
         break;
-      }      
+      }
     }
   }
 
