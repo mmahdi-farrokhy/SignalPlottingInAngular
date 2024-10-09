@@ -9,8 +9,15 @@
         <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
         <app-uplot-template [shouldRefresh]="shouldRefresh"></app-uplot-template>
     </div>
-    <div *ngSwitchCase="1">
-        <app-echarts-template></app-echarts-template>
+    <div *ngSwitchCase="1" class="echarts-container">
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
+        <app-echarts-template [shouldRefresh]="shouldRefresh"></app-echarts-template>
     </div>
     <div *ngSwitchCase="2">
         <p>Something Else</p>
