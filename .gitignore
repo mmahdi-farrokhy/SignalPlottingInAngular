@@ -41,5 +41,8 @@ testem.log
 .DS_Store
 Thumbs.db
 
+realTimePlottingApp-win32-x64
 RealTimePlottingApp-win32-x64
+realTimePlottingApp-linux-x64
+RealTimePlottingApp-linux-x64
 release-build
