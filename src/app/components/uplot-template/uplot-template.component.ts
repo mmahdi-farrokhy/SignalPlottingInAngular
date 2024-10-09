@@ -9,11 +9,12 @@ import uPlot from 'uplot';
   styleUrl: './uplot-template.component.css'
 })
 export class UPlotTemplateComponent {
-  @ViewChild('plotContainer', { static: true }) plotContainer: ElementRef | undefined;
+  @ViewChild('plotContainer', { static: true }) plotContainer: ElementRef;
   @Input() shouldRefresh: boolean = true;
   @Input() channelIndex: number;
   uplotInstance!: uPlot;
   intervalId: any;
+
 
   ngAfterViewInit() {
     const options: uPlot.Options = {
@@ -46,7 +47,7 @@ export class UPlotTemplateComponent {
   startRealTimeData() {
     let time = 0;
     this.uplotInstance.setData([new Float64Array([]), new Float64Array([])]);
-    
+
     this.intervalId = setInterval(() => {
       if (!this.shouldRefresh) return;
 
@@ -56,7 +57,7 @@ export class UPlotTemplateComponent {
       const currentXArray = Array.from(this.uplotInstance.data[0]).filter(x => x !== null && x !== undefined);
       const currentYArray = Array.from(this.uplotInstance.data[1]).filter(y => y !== null && y !== undefined);
 
-      currentXArray.push(newX/32);
+      currentXArray.push(newX / 32);
       currentYArray.push(newY);
 
       const newXArray = new Float64Array(currentXArray);
